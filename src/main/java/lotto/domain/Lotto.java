@@ -21,7 +21,7 @@ public class Lotto {
         }
     }
 
-    public List<Integer> getCopyNumbers() {
+    public List<Integer> getNumbers() {
         return List.copyOf(numbers);
     }
 }
