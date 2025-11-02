@@ -33,7 +33,7 @@ public class InputView {
                 .map(Integer::parseInt)
                 .collect(Collectors.toSet());
 
-        Validator.validateDuplicateLottoNumbers(duplicateLottoNumbers);
+        Validator.validateDuplicateWinningLottoNumbers(duplicateLottoNumbers);
         return duplicateLottoNumbers;
     }
 

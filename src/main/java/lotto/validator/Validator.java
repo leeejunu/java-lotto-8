@@ -11,8 +11,9 @@ public class Validator {
     private static final String INVALID_PURCHASE_COST_FORMAT_ERROR_MESSAGE = "구입 비용은 숫자만 입력 가능합니다.";
     private static final String INVALID_WINNING_LOTTO_NUMBER_FORMAT_ERROR_MESSAGE = "당첨 번호를 잘못 입력하셨습니다.";
     private static final String INVALID_LOTTO_NUMBER_RANGE_ERROR_MESSAGE = "로또 번호는 1에서 45 사이의 숫자여야 합니다.";
-    private static final String INVALID_DUPLICATE_WINNING_LOTTO_NUMBER = "첨 번호는 중복될 수 없습니다.";
+    private static final String INVALID_DUPLICATE_WINNING_LOTTO_NUMBER = "당첨 번호는 중복될 수 없습니다.";
     private static final String INVALID_LOTTO_NUMBER_COUNT_ERROR_MESSAGE = "로또 번호는 6개여야 합니다.";
+    private static final String INVALID_DUPLICATE_BONUS_NUMBER = "당첨 번호와 보너스 번호는 중복될 수 없습니다.";
 
     public static void validateInputPurchaseCost(String cost) {
 
@@ -27,7 +28,7 @@ public class Validator {
         Arrays.stream(winningLottoNumbers)
                 .forEach(Validator::validateInputLottoNumber);
 
-        if (winningLottoNumbers.length != Lotto.UNIT) {
+        if (winningLottoNumbers.length != Lotto.LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_COUNT_ERROR_MESSAGE);
         }
     }
@@ -40,9 +41,15 @@ public class Validator {
         }
     }
 
-    public static void validateDuplicateLottoNumbers(Set<Integer> lottoNumbers) {
+    public static void validateDuplicateWinningLottoNumbers(Set<Integer> lottoNumbers) {
         if (lottoNumbers.size() != Lotto.LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(INVALID_DUPLICATE_WINNING_LOTTO_NUMBER);
+        }
+    }
+
+    public static void validateDuplicateBonusNumber(Set<Integer> lottoNumbers, Integer bonusNumber) {
+        if (lottoNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException(INVALID_DUPLICATE_BONUS_NUMBER);
         }
     }
 
