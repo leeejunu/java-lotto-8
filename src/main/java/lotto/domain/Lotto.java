@@ -1,8 +1,13 @@
-package lotto;
+package lotto.domain;
 
 import java.util.List;
 
 public class Lotto {
+    public static final Long UNIT = 1_000L;
+    public static final Integer MIN_NUMBER = 1;
+    public static final Integer MAX_NUMBER = 45;
+    public static final Integer LOTTO_NUMBER_COUNT = 6;
+
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
@@ -16,5 +21,7 @@ public class Lotto {
         }
     }
 
-    // TODO: 추가 기능 구현
+    public List<Integer> getCopyNumbers() {
+        return List.copyOf(numbers);
+    }
 }
