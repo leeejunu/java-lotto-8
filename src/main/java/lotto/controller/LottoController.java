@@ -26,8 +26,11 @@ public class LottoController {
     public void run() {
         Long purchaseCost = retryInput(InputView::readPurchaseCost);
         Set<Integer> winningLottoNumbers = retryInput(InputView::readWinningLottoNumbers);
-        Integer bonusLottoNumber = retryInput(InputView::readBonusLottoNumbers);
-        Validator.validateDuplicateBonusNumber(winningLottoNumbers, bonusLottoNumber);
+        Integer bonusLottoNumber = retryInput(() -> {
+            Integer input = InputView.readBonusLottoNumbers();
+            Validator.validateDuplicateBonusNumber(winningLottoNumbers, input);
+            return input;
+        });
 
         List<Lotto> lottos = generateLottos(purchaseCost);
 
