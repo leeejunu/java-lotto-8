@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.Set;
 
 public class Lotto {
     public static final Long UNIT = 1_000L;
@@ -23,5 +24,11 @@ public class Lotto {
 
     public List<Integer> getNumbers() {
         return List.copyOf(numbers);
+    }
+
+    public int countMatchedNumbers(Set<Integer> winningNumbers) {
+        return (int) numbers.stream()
+                .filter(winningNumbers::contains)
+                .count();
     }
 }
