@@ -23,9 +23,12 @@ public class InputView {
 
     public static Set<Integer> readWinningLottoNumbers() {
         System.out.println(INPUT_WINNING_LOTTO_NUMBERS);
-        String winningLottoNumber = Console.readLine();
+        String input = Console.readLine();
+        return parseWinningLottoNumbers(input);
+    }
 
-        String[] winningLottoNumbers = winningLottoNumber.split(",", -1);
+    public static Set<Integer> parseWinningLottoNumbers(String input) {
+        String[] winningLottoNumbers = input.split(",", -1);
 
         Validator.validateInputWinningLottoNumbers(winningLottoNumbers);
 
