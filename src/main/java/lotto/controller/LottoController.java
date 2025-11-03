@@ -52,7 +52,9 @@ public class LottoController {
         long lottoCount = purchaseCost / UNIT;
 
         for (int i = 0; i < lottoCount; i++) {
-            List<Integer> randomNewLottoNumbers = pickUniqueNumbersInRange(MIN_NUMBER, MAX_NUMBER, LOTTO_NUMBER_COUNT);
+            List<Integer> randomNewLottoNumbers = new ArrayList<>(
+                    pickUniqueNumbersInRange(MIN_NUMBER, MAX_NUMBER, LOTTO_NUMBER_COUNT)
+            );
             randomNewLottoNumbers.sort(Integer::compareTo);
             Lotto lotto = new Lotto(randomNewLottoNumbers);
             lottos.add(lotto);
