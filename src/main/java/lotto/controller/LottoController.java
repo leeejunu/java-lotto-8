@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.EnumMap;
+import java.util.function.Supplier;
 
 import static camp.nextstep.edu.missionutils.Randoms.pickUniqueNumbersInRange;
 import static lotto.domain.Lotto.UNIT;
@@ -23,9 +24,9 @@ public class LottoController {
     Map<Rank, Integer> result = new EnumMap<>(Rank.class);
 
     public void run() {
-        Long purchaseCost = InputView.readPurchaseCost();
-        Set<Integer> winningLottoNumbers = InputView.readWinningLottoNumbers();
-        Integer bonusLottoNumber = InputView.readBonusLottoNumbers();
+        Long purchaseCost = retryInput(InputView::readPurchaseCost);
+        Set<Integer> winningLottoNumbers = retryInput(InputView::readWinningLottoNumbers);
+        Integer bonusLottoNumber = retryInput(InputView::readBonusLottoNumbers);
         Validator.validateDuplicateBonusNumber(winningLottoNumbers, bonusLottoNumber);
 
         List<Lotto> lottos = generateLottos(purchaseCost);
@@ -56,5 +57,16 @@ public class LottoController {
 
         OutputView.printPurchasedLottos(lottoCount, lottos);
         return lottos;
+    }
+
+
+    private <T> T retryInput(Supplier<T> supplier) {
+        while (true) {
+            try {
+                return supplier.get();
+            } catch (IllegalArgumentException e) {
+                OutputView.printErrorMessage(e.getMessage());
+            }
+        }
     }
 }

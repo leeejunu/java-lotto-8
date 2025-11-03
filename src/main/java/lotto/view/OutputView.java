@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class OutputView {
 
     private static final String PURCHASED_LOTTO_MESSAGE = "개를 구매했습니다.";
-
+    private static final String ERROR_MESSAGE_PREFIX = "[ERROR] ";
     private static final String STATISTICS_HEADER = "\n당첨 통계\n---";
 
     public static void printResult(Map<Rank, Integer> result) {
@@ -45,6 +45,10 @@ public class OutputView {
                 .map(String::valueOf)
                 .collect(Collectors.joining(", "))
                 + "]";
+    }
+
+    public static void printErrorMessage(String message) {
+        System.out.println(ERROR_MESSAGE_PREFIX + message);
     }
 }
 
